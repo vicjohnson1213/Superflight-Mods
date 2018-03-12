@@ -7,8 +7,8 @@
     <ProjectGuid>{4E8218C2-1A37-49FB-9C36-44E33AEE2716}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Statistics</RootNamespace>
-    <AssemblyName>Statistics</AssemblyName>
+    <RootNamespace>RunStatistics</RootNamespace>
+    <AssemblyName>RunStatistics</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -46,7 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Statistics.cs" />
+    <Compile Include="RunStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

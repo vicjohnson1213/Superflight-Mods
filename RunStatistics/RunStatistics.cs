@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace Statistics
+namespace RunStatistics
 {
     public class RunStatistics : IMod
     {
@@ -78,10 +78,6 @@ namespace Statistics
 
                     using (var writer = File.AppendText(SaveLocation))
                         writer.WriteLine(CurrentRun.ToCsvRow());
-                    
-                    Console.WriteLine($"Secured score this map: {CurrentRun.SecuredScore}");
-                    Console.WriteLine($"Total score this run: {CurrentRun.TotalScore}");
-                    Console.WriteLine();
 
                     LastRun = CurrentRun;
                     CurrentRun = null;
