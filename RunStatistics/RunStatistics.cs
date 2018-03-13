@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace RunStatistics
@@ -46,6 +47,7 @@ namespace RunStatistics
                 if (LocalGameManager.Singleton.playerState == LocalGameManager.PlayerState.Flying)
                 {
                     if (CurrentRun == null)
+                    {
                         CurrentRun = new RunData
                         {
                             Seed = WorldManager.currentWorld.seed,
@@ -54,6 +56,9 @@ namespace RunStatistics
                             TotalScore = 0,
                             ScorePerSecond = new List<int>()
                         };
+
+                        //ComboIncrease = 0;
+                    }
 
                     CurrentRun.ScorePerSecond.Add(ComboIncrease);
                     
@@ -76,8 +81,9 @@ namespace RunStatistics
                     else
                         CurrentRun.SecuredScore = LocalGameManager.Singleton.ScoreThisRun;
 
-                    using (var writer = File.AppendText(SaveLocation))
-                        writer.WriteLine(CurrentRun.ToCsvRow());
+                    //using (var writer = File.AppendText(SaveLocation))
+                    //    writer.WriteLine(CurrentRun.ToCsvRow());
+                    Console.WriteLine(CurrentRun.ScorePerSecond.Take(10));
 
                     LastRun = CurrentRun;
                     CurrentRun = null;
