@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
 
 namespace RunStatistics
@@ -28,7 +27,7 @@ namespace RunStatistics
             saveFile.Directory.Create();
             if (!File.Exists(SaveLocation))
                 using (var writer = File.AppendText(SaveLocation))
-                    writer.WriteLine("Seed,Alphanumeric Seed,SecuredScore,Ending,ScorePerSecond");
+                    writer.WriteLine("Seed,Alphanumeric Seed,Accumulated Score,Secured Score,Ending,Score Per Second");
 
             LastSecond = Time.time;
 
@@ -41,7 +40,7 @@ namespace RunStatistics
             // A run is over if the player is dead or the world changes (through a portal or the bottom of a world).
             var IsPayerDead = LocalGameManager.Singleton.playerState == LocalGameManager.PlayerState.Dead;
             var isNextWorld = CurrentRun != null && (CurrentRun.Seed != WorldManager.currentWorld.seed);
-            var isPlayerReset = Input.GetButtonDown("ResetPlayer");
+            var isPlayerReset = LocalGameManager.Singleton.playerState == LocalGameManager.PlayerState.Flying && Input.GetButtonDown("ResetPlayer");
 
             if (CurrentRun != null && (IsPayerDead || isNextWorld || isPlayerReset))
             {
@@ -60,9 +59,12 @@ namespace RunStatistics
                 else
                     CurrentRun.SecuredScore = LocalGameManager.Singleton.ScoreThisRun;
 
-                if (CurrentRun.ScorePerSecond.Any(s => s > 0)) ;
-                using (var writer = File.AppendText(SaveLocation))
-                    writer.WriteLine(CurrentRun.ToCsvRow());
+                foreach (int s in CurrentRun.ScorePerSecond)
+                    CurrentRun.AccumulatedScore += s;
+
+                if (CurrentRun.AccumulatedScore > 0)
+                    using (var writer = File.AppendText(SaveLocation))
+                        writer.WriteLine(CurrentRun.ToCsvRow());
 
                 LastRun = CurrentRun;
                 CurrentRun = null;
@@ -82,6 +84,7 @@ namespace RunStatistics
                         {
                             Seed = WorldManager.currentWorld.seed,
                             AlphanumericString = WorldManager.currentWorld.alphanumericSeed,
+                            AccumulatedScore = 0,
                             SecuredScore = 0,
                             TotalScore = 0,
                             ScorePerSecond = new List<int>()
@@ -104,6 +107,7 @@ namespace RunStatistics
             public int Seed { get; set; }
             public string AlphanumericString { get; set; }
             public int SecuredScore { get; set; }
+            public int AccumulatedScore { get; set; }
             public int TotalScore { get; set; }
             public List<int> ScorePerSecond { get; set; }
             public RunEnding Ending { get; set; }
@@ -117,7 +121,7 @@ namespace RunStatistics
 
                 scores = scores.TrimEnd('|');
 
-                return $"{Seed},{AlphanumericString},{SecuredScore},{Ending},{scores}";
+                return $"{Seed},{AlphanumericString},{AccumulatedScore},{SecuredScore},{Ending},{scores}";
             }
         }
 
