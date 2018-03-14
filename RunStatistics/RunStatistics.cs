@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace RunStatistics
@@ -37,6 +38,36 @@ namespace RunStatistics
 
         public void Update()
         {
+            // A run is over if the player is dead or the world changes (through a portal or the bottom of a world).
+            var IsPayerDead = LocalGameManager.Singleton.playerState == LocalGameManager.PlayerState.Dead;
+            var isNextWorld = CurrentRun != null && (CurrentRun.Seed != WorldManager.currentWorld.seed);
+            var isPlayerReset = Input.GetButtonDown("ResetPlayer");
+
+            if (CurrentRun != null && (IsPayerDead || isNextWorld || isPlayerReset))
+            {
+                CurrentRun.TotalScore = LocalGameManager.Singleton.ScoreThisRun;
+
+                if (IsPayerDead)
+                    CurrentRun.Ending = RunEnding.Death;
+                else if (isNextWorld)
+                    CurrentRun.Ending = RunEnding.NextWorld;
+                else
+                    CurrentRun.Ending = RunEnding.Reset;
+
+                // If the last run ended by traversing worlds, the player likely has points already, so we need to subtract those.
+                if (LastRun != null && LastRun.Ending == RunEnding.NextWorld)
+                    CurrentRun.SecuredScore = LocalGameManager.Singleton.ScoreThisRun - LastRun.TotalScore;
+                else
+                    CurrentRun.SecuredScore = LocalGameManager.Singleton.ScoreThisRun;
+
+                if (CurrentRun.ScorePerSecond.Any(s => s > 0)) ;
+                using (var writer = File.AppendText(SaveLocation))
+                    writer.WriteLine(CurrentRun.ToCsvRow());
+
+                LastRun = CurrentRun;
+                CurrentRun = null;
+            }
+
             // Calculate the increase in combo each frame, so no points are lost.
             ComboIncrease += Math.Max(0, LocalGameManager.Singleton.ScoreThisCombo - LastCombo);
             LastCombo = LocalGameManager.Singleton.ScoreThisCombo;
@@ -46,6 +77,7 @@ namespace RunStatistics
                 if (LocalGameManager.Singleton.playerState == LocalGameManager.PlayerState.Flying)
                 {
                     if (CurrentRun == null)
+                    {
                         CurrentRun = new RunData
                         {
                             Seed = WorldManager.currentWorld.seed,
@@ -55,32 +87,12 @@ namespace RunStatistics
                             ScorePerSecond = new List<int>()
                         };
 
+                        ComboIncrease = 0;
+                    }
+
                     CurrentRun.ScorePerSecond.Add(ComboIncrease);
                     
                     ComboIncrease = 0;
-                }
-
-                // A run is over if the player is dead or the world changes (through a portal or the bottom of a world).
-                if (CurrentRun != null && (LocalGameManager.Singleton.playerState == LocalGameManager.PlayerState.Dead || CurrentRun.Seed != WorldManager.currentWorld.seed))
-                {
-                    CurrentRun.TotalScore = LocalGameManager.Singleton.ScoreThisRun;
-
-                    if (LocalGameManager.Singleton.playerState == LocalGameManager.PlayerState.Dead)
-                        CurrentRun.Ending = RunEnding.Death;
-                    else
-                        CurrentRun.Ending = RunEnding.NextWorld;
-
-                    // If the last run ended by traversing worlds, the player likely has points already, so we need to subtract those.
-                    if (LastRun != null && LastRun.Ending == RunEnding.NextWorld)
-                        CurrentRun.SecuredScore = LocalGameManager.Singleton.ScoreThisRun - LastRun.TotalScore;
-                    else
-                        CurrentRun.SecuredScore = LocalGameManager.Singleton.ScoreThisRun;
-
-                    using (var writer = File.AppendText(SaveLocation))
-                        writer.WriteLine(CurrentRun.ToCsvRow());
-
-                    LastRun = CurrentRun;
-                    CurrentRun = null;
                 }
 
                 LastSecond = Time.time;
@@ -112,7 +124,8 @@ namespace RunStatistics
         public enum RunEnding
         {
             Death,
-            NextWorld
+            NextWorld,
+            Reset
         }
     }
 }
