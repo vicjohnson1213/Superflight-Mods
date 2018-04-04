@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HighScoreTrail", "HighScore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trails", "Trails\Trails.csproj", "{B5ADE441-009E-44B0-B6E1-5333EECD238A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstPerson", "FirstPerson\FirstPerson.csproj", "{2F7C80E9-539C-40FF-9996-B0937B45A49E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{B5ADE441-009E-44B0-B6E1-5333EECD238A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5ADE441-009E-44B0-B6E1-5333EECD238A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5ADE441-009E-44B0-B6E1-5333EECD238A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F7C80E9-539C-40FF-9996-B0937B45A49E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F7C80E9-539C-40FF-9996-B0937B45A49E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F7C80E9-539C-40FF-9996-B0937B45A49E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F7C80E9-539C-40FF-9996-B0937B45A49E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
