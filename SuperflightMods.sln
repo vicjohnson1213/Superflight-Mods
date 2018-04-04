@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trails", "Trails\Trails.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstPerson", "FirstPerson\FirstPerson.csproj", "{2F7C80E9-539C-40FF-9996-B0937B45A49E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlowMotion", "SlowMotion\SlowMotion.csproj", "{C0FC24A2-AD4D-4930-BC07-8E3E66073EB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{2F7C80E9-539C-40FF-9996-B0937B45A49E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F7C80E9-539C-40FF-9996-B0937B45A49E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F7C80E9-539C-40FF-9996-B0937B45A49E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0FC24A2-AD4D-4930-BC07-8E3E66073EB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FC24A2-AD4D-4930-BC07-8E3E66073EB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FC24A2-AD4D-4930-BC07-8E3E66073EB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FC24A2-AD4D-4930-BC07-8E3E66073EB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
