@@ -7,7 +7,7 @@ namespace NextWorld
     {
         private void Update()
         {
-            var nextPressed = Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.JoystickButton2);
+            var nextPressed = Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.JoystickButton5);
             if (LocalGameManager.Singleton.playerState == LocalGameManager.PlayerState.Flying && nextPressed)
             {
                 LocalGameManager.Singleton.ResetPlayer();
