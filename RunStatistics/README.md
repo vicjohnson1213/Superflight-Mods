@@ -33,4 +33,4 @@ Import the CSV file into Microsoft Excel or Google Sheets and chart your score p
 
 Here's an graph that I generated from one of my highest scoring runs (210k on seed "rekkerd"):
 
-[[https://github.com/vicjohnson1213/Superflight-Mods/blob/master/RunStatistics/images/rekkerd.png]]
+![210k run on seed "rekkerd"](images/rekkerd.png)
