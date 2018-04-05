@@ -8,7 +8,7 @@ namespace SlowMotion
     {
         private void FixedUpdate()
         {
-            var slow = Input.GetKey(KeyCode.JoystickButton2) || Input.GetKey(KeyCode.LeftShift);
+            var slow = Input.GetKey(KeyCode.JoystickButton2) || Input.GetKey(KeyCode.LeftControl);
 
             if (slow)
             {
