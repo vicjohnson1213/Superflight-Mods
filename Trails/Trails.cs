@@ -1,11 +1,18 @@
 ﻿using SFMF;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace Trails
 {
     public class Trails : IMod
     {
+        private const string SettingsPath = @".\SFMF\ModSettings\Trails.csv";
+
+        private KeyCode KeyboardKey { get; set; }
+        private KeyCode ControllerButton { get; set; }
+
         private List<GameObject> trails;
         private GameObject currentTrailGO;
 
@@ -16,6 +23,19 @@ namespace Trails
 
         void Start()
         {
+            var settings = File.ReadAllLines(SettingsPath);
+
+            foreach (var line in settings)
+            {
+                if (line == "")
+                    continue;
+
+                var parts = line.Split(',');
+
+                KeyboardKey = (KeyCode)Enum.Parse(typeof(KeyCode), parts[2]);
+                ControllerButton = GetControllerButton(parts[3]);
+            }
+
             trailStartTime = 0;
             trails = new List<GameObject>();
         }
@@ -60,7 +80,7 @@ namespace Trails
             }
 
             // If the player advances to the next world or presses the "clear" button (c on keyboard and b on a controller), clear all trails.
-            var clearPressed = Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1);
+            var clearPressed = Input.GetKeyDown(KeyboardKey) || Input.GetKeyDown(ControllerButton);
 
             if (isNextWorld)
             {
@@ -75,6 +95,28 @@ namespace Trails
 
                 trails.Clear();
             }
+        }
+
+        private KeyCode GetControllerButton(string button)
+        {
+            if (button == "B")
+                return KeyCode.JoystickButton1;
+            if (button == "X")
+                return KeyCode.JoystickButton2;
+            if (button == "Y")
+                return KeyCode.JoystickButton3;
+            if (button == "LB")
+                return KeyCode.JoystickButton4;
+            if (button == "RB")
+                return KeyCode.JoystickButton5;
+            if (button == "Select")
+                return KeyCode.JoystickButton6;
+            if (button == "L3")
+                return KeyCode.JoystickButton8;
+            if (button == "R3")
+                return KeyCode.JoystickButton9;
+
+            return KeyCode.None;
         }
     }
 }
