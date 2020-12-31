@@ -9,9 +9,12 @@ namespace Jetpack
     {
         private const string SettingsPath = @".\SFMF\ModSettings\Jetpack.csv";
 
-        private float Acceleration { get; set; }
-        private KeyCode KeyboardKey { get; set; }
-        private KeyCode ControllerButton { get; set; }
+        private float BoostStrength { get; set; }
+        private float BreakStrength { get; set; }
+        private KeyCode KeyboardKeyBoost { get; set; }
+        private KeyCode ControllerButtonBoost { get; set; }
+        private KeyCode KeyboardKeyBreak { get; set; }
+        private KeyCode ControllerButtonBreak { get; set; }
 
         private void Start()
         {
@@ -19,29 +22,40 @@ namespace Jetpack
 
             foreach (var line in settings)
             {
-                if (line == "")
-                    continue;
-
                 var parts = line.Split(',');
 
                 if (parts[0] == "Setting")
-                    Acceleration = float.Parse(parts[2]);
-                else
                 {
-                    KeyboardKey = (KeyCode)Enum.Parse(typeof(KeyCode), parts[2]);
-                    ControllerButton = GetControllerButton(parts[3]);
+                    if (parts[1] == "BoostStrength")
+                        BoostStrength = float.Parse(parts[2]);
+                    if (parts[1] == "BreakStrength")
+                        BreakStrength = float.Parse(parts[2]);
+                }
+                if (parts[0] == "Control")
+                {
+                    if (parts[1] == "Boost")
+                    {
+                        KeyboardKeyBoost = (KeyCode)Enum.Parse(typeof(KeyCode), parts[2]);
+                        ControllerButtonBoost = GetControllerButton(parts[3]);
+                    }
+                    if (parts[1] == "Break")
+                    {
+                        KeyboardKeyBreak = (KeyCode)Enum.Parse(typeof(KeyCode), parts[2]);
+                        ControllerButtonBreak = GetControllerButton(parts[3]);
+                    }
                 }
             }
         }
 
         private void FixedUpdate()
         {
-            var boost = Input.GetKey(ControllerButton) || Input.GetKey(KeyboardKey);
+            var boost = Input.GetKey(ControllerButtonBoost) || Input.GetKey(KeyboardKeyBoost);
+            var brk   = Input.GetKey(ControllerButtonBreak) || Input.GetKey(KeyboardKeyBreak);
 
             if (boost)
-            {
-                PlayerMovement.Singleton.currentSpeed += Acceleration;
-            }
+                PlayerMovement.Singleton.currentSpeed += BoostStrength;
+            if (brk)
+                PlayerMovement.Singleton.currentSpeed -= BreakStrength;
         }
 
         private KeyCode GetControllerButton(string button)
