@@ -32,28 +32,28 @@
   <ItemGroup>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SuperFlight\superflight_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>Z:\Games\Steam\steamapps\common\SuperFlight\superflight_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SuperFlight\superflight_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>Z:\Games\Steam\steamapps\common\SuperFlight\superflight_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SuperFlight\superflight_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>Z:\Games\Steam\steamapps\common\SuperFlight\superflight_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SuperFlight\superflight_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>Z:\Games\Steam\steamapps\common\SuperFlight\superflight_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SuperFlight\superflight_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>Z:\Games\Steam\steamapps\common\SuperFlight\superflight_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SuperFlight\superflight_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>Z:\Games\Steam\steamapps\common\SuperFlight\superflight_Data\Managed\UnityEngine.UIModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
