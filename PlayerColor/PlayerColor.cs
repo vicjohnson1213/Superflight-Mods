@@ -7,7 +7,7 @@ namespace PlayerColor
 {
     public class PlayerColor : IMod
     {
-        private const string SettingsPath = @".\SFMF\ModSettings\PlayerColor.csv";
+        private const string SettingsPath = @".\SFMF\ModSettings\Player Color.csv";
 
         private string Color { get; set; }
 
